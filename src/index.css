@@ -498,6 +498,12 @@ Cocktail
   gap: 3rem;
 }
 
+@media screen and (max-width: 300px) {
+  .nav-links {
+    gap: 1rem;
+  }
+}
+
 .nav-links a {
   font-size: 20px;
   font-weight: 400;
@@ -803,5 +809,12 @@ article:hover {
   .single-drink-img {
     width: 800px;
     height: 800px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .single-drink-img {
+    width: 200px;
+    height: 200px;
   }
 }
