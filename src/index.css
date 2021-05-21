@@ -499,7 +499,7 @@ Cocktail
 }
 
 @media screen and (max-width: 300px) {
-  .nav-links {
+  .nav-links li {
     gap: 1rem;
   }
 }
