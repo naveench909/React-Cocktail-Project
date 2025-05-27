@@ -1,59 +1,76 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { useCallback } from 'react'
+import React, { useState, useContext, useEffect, useReducer } from 'react'
+import { useCallback, useMemo } from 'react'
 
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
+const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 const AppContext = React.createContext()
+const defaultState = {}
 
-
-
-const AppProvider = ({ children }) => {
+export default function AppProvider({ children }) {
   const[loading , setLoading] = useState(true);
-  const[searchTerm , setSearchTerm] = useState('')
+  const [searchTerm , setSearchTerm] = useState('')
   const [cocktailList , setCocktailList] = useState([]);
+  const [error, setError] = useState(false)
 
-  const getData = useCallback(async()=>{
-    setLoading(true);
+  const getData = useCallback(async()=> {
+    setLoading(true)
     try{
-      const response = await fetch(`${url}${searchTerm}`);
+      const response = await fetch(`${URL}${searchTerm}`)
       const cocktailData = await response.json();
-      const{drinks} = cocktailData;
-      if(drinks){
-        const newCocktails = drinks.map((item)=>{
-          const{idDrink,strDrink,strDrinkThumb,strAlcoholic,strGlass} = item
-          return{
-            id:idDrink , name:strDrink , image:strDrinkThumb , info:strAlcoholic , glass:strGlass
+      const { drinks } = cocktailData;
+
+      if(drinks.length === 0){
+        setCocktailList({})
+      }else{
+        const newCocktails = drinks.map(item => {
+          const {
+            idDrink,
+            strDrink,
+            strDrinkThumb,
+            strAlcoholic,
+            strGlass,
+            unusedProp
+          } = item
+          return {
+            id: idDrink,
+            name: strDrink,
+            image: strDrinkThumb,
+            info: strAlcoholic,
+            glass: strGlass,
           }
         })
-        setCocktailList(newCocktails);
-      }else{
-        setCocktailList([])
+        setCocktailList(newCocktails)
       }
       setLoading(false)
-    }catch(error){
-      console.log(error);
-      setLoading(false)
+    } catch(error) {
+      console.error('Fetching error:', error.message)
+      setCocktailList(null)
+      setLoading('false')
     }
-  },[searchTerm])
+  }, [searchTerm])
 
-  useEffect(()=>{
-    getData();
-  },[searchTerm,getData])
+  useEffect(() => {
+    getData()
+  }, [getData])
 
-  return <AppContext.Provider 
-    value={{
-      loading,
-      cocktailList,
-      setCocktailList,
-      setSearchTerm,
-      getData
-    }}>
-    
-    
-    {children}</AppContext.Provider>
+  return (
+    <AppContext.Provider
+      value={{
+        loading,
+        cocktailList,
+        setCocktailList,
+        setSearchTerm,
+        getData,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  )
 }
-// make sure use
+
 export const useGlobalContext = () => {
-  return useContext(AppContext)
+  const ctx = useContext(AppContext)
+  if (!ctx) return null
+  return ctx
 }
 
-export { AppContext, AppProvider}
+export { AppContext, AppProvider }
