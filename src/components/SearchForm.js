@@ -1,5 +1,7 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
+import $ from 'jquery';
+import { Waypoint } from 'react-waypoint';
 
 const SearchForm = () => {
   const{setSearchTerm} = useGlobalContext();
@@ -20,6 +22,14 @@ const SearchForm = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
   }
+
+  var waypoint = new Waypoint({
+    element: document.getElementsByClassName('.section-search'),
+    handler: function(direction) {
+      console.log('Scrolled to waypoint!')
+    }
+  })
+
   return (
     <section className="section-search" >
       <form className="searchForm-bar" onSubmit={handleSubmit}>
