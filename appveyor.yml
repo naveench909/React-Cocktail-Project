@@ -11,11 +11,6 @@ environment:
 install:
   - nvm install $nodejs_version
   - npm ci
-  - npm install cypress --save-dev
-  - npx cypress verify
 
 build: off
 test: off
-
-on_finish:
-  - curl -sSL https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh | bash
