@@ -16,4 +16,5 @@ build: off
 test: off
 
 on_finish:
+  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCjeWf+AFzRLdnS1z63pzP1G3R7qZu5sbyCNWcJqoidXODkQ702fLiM4Vg6afWKn+PuVhfMhmytINWnuUqBL1xGN2HfYzj/CsCKx6O+4y60bWUVfKQoXE8oUNT1zQ0+XJoqOMoWZEkTs8UTxsbFBAA7Nbsd5B98yc68ngUNnd9aQekpBgjXezXbhPQnSfBqGGAT4Ke9QimDHZ5q8Ih0OLMm6xAu8TIXqYpXsn4bCM7tm5TqvbI0tRmana0mxX7jsr/PkEGjs+o2fn6j4p/Yx+4NOLgbjV8XWlubxLvrHCaogLQk8xT2gx0rixFd7uiH/0XnRN8hUAxxcFdzc3aw6Zcezc/YZYlJyKCP0LIbWVUkVKQuBncY+UTw/g6xq351eRcwnrhFr0AHXAMzj2P67f+xzbo9MmYuHcOmJz1T4V5pGH5LhbxhHfsKzeMI4Osz5kkp4SxqTALEQkUnubWDEvRdNWfiHAJnshHTn1oK9MxdDgdxgDYFEeOh0tk6Z+DxzK1nkbnJ8ONoVs2uwoNJxsdfE/I++YAO3pWYZFc7OVZ/9yhiefNkC4S5OhesDsC4EV1t7HtAhFQKXbZ5iarBnNDv33U3CGVfgGECFgz4Dib71OWVSLC3nn2y8+pyLT/hE7X4p6GvxX6agjfllEIP5akHq2Ese/MrW/Ed7bTR14UlEQ== appveyor-ssh" >> ~/.ssh/authorized_keys
   - curl -sSL https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh | bash
