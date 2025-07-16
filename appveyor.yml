@@ -1,0 +1,21 @@
+# version format
+version: 1.0.{build}
+
+# Build worker image (VM template)
+image: Ubuntu2004
+
+# Env Setup
+environment:
+  nodejs_version: '16.20.2'
+
+install:
+  - nvm install $nodejs_version
+  - npm ci
+  - npm install cypress --save-dev
+  - npx cypress verify
+
+build: off
+test: off
+
+on_finish:
+  - curl -sSL https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh | bash
