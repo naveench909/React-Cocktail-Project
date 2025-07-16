@@ -7,6 +7,7 @@ image: Ubuntu2004
 # Env Setup
 environment:
   nodejs_version: '16.20.2'
+  APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCePI/E8Hns5ql7Ugk/neLPQBVExyqqRatDluy/gPeArAdma0nZ7PxzJ7AiyZKVZfaTEcx3q5eSQy1Hh/RK+3YIil2qA3hjgK6eBcHtvXuc+mIUZBi1/38bJStQaEbZGdGP2WcrEKaz+FLD2Wv2sHihn3d+bla8t8dleT0zIHHVidrmo8mW9A2r3f06HFADCMCGlaHhopJvFHmzINM2oKHNLKHEgZ67nPBl5r0HaUt4lii0gXa9dk58dBOOTvmdgky7zp/WNuD9c41nRBvoCgKY0M4mKSbDJv9NGMeTsIJ1Zi9Dt1Qaz36tn0WekbFCDfG1SYIPyTm68kR10xs27ftw2k0HzPyigN8DoJrKkZ0c2pGIQyp0MGqfmlMYz51Xenz7VCu/5u/W0/G8lOKxre+BG760FJyV+9u/SA21Nroua8gMLDC+sfXDAJrvr6YxBWVoEpBxkc1ws560MxEehQhF1HopKeU0uB+uc6Wm2ce3lXjmx2zgP0fUn2kzzunzXdro/IA5xCEnuhe4TK6WsNaX4MqNsmTf1o9MPSZjunJSSzAetcQg1lV+TTLHpCrKZQzQcQ/Dk7bH3dbkot+6F01c7v0kqWVStPloeC7GwBb9PiiqaA/kJXmasPliPn1RfXZZ8EJCCOyhJfaOZ+VtIT2DtgbkPTu5NinXR/kvUcoUbw== appveyor-ssh
 
 install:
   - nvm install $nodejs_version
@@ -16,5 +17,5 @@ build: off
 test: off
 
 on_finish:
-  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCePI/E8Hns5ql7Ugk/neLPQBVExyqqRatDluy/gPeArAdma0nZ7PxzJ7AiyZKVZfaTEcx3q5eSQy1Hh/RK+3YIil2qA3hjgK6eBcHtvXuc+mIUZBi1/38bJStQaEbZGdGP2WcrEKaz+FLD2Wv2sHihn3d+bla8t8dleT0zIHHVidrmo8mW9A2r3f06HFADCMCGlaHhopJvFHmzINM2oKHNLKHEgZ67nPBl5r0HaUt4lii0gXa9dk58dBOOTvmdgky7zp/WNuD9c41nRBvoCgKY0M4mKSbDJv9NGMeTsIJ1Zi9Dt1Qaz36tn0WekbFCDfG1SYIPyTm68kR10xs27ftw2k0HzPyigN8DoJrKkZ0c2pGIQyp0MGqfmlMYz51Xenz7VCu/5u/W0/G8lOKxre+BG760FJyV+9u/SA21Nroua8gMLDC+sfXDAJrvr6YxBWVoEpBxkc1ws560MxEehQhF1HopKeU0uB+uc6Wm2ce3lXjmx2zgP0fUn2kzzunzXdro/IA5xCEnuhe4TK6WsNaX4MqNsmTf1o9MPSZjunJSSzAetcQg1lV+TTLHpCrKZQzQcQ/Dk7bH3dbkot+6F01c7v0kqWVStPloeC7GwBb9PiiqaA/kJXmasPliPn1RfXZZ8EJCCOyhJfaOZ+VtIT2DtgbkPTu5NinXR/kvUcoUbw== appveyor-ssh" >> ~/.ssh/authorized_keys
-  - curl -sSL https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh | bash
+  - sh: export APPVEYOR_SSH_BLOCK=true
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
